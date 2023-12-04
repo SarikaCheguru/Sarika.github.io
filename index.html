@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your E-commerce Website</title>
+    <style>
+        /* Add your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+        nav {
+            background-color: #444;
+            padding: 1em;
+            text-align: center;
+        }
+        section {
+            padding: 1em;
+        }
+        .product {
+            border: 1px solid #ddd;
+            padding: 1em;
+            margin: 1em;
+            text-align: center;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Your E-commerce Website</h1>
+</header>
+
+<nav>
+    <button onclick="showAllProducts()">All Products</button>
+    <button onclick="showCategory('electronics')">Electronics</button>
+    <button onclick="showCategory('clothing')">Clothing</button>
+    <input type="text" id="searchInput" placeholder="Search...">
+    <button onclick="searchProducts()">Search</button>
+</nav>
+
+<section id="productsSection">
+    <!-- Product listings will go here -->
+</section>
+
+<footer>
+    <p>&copy; 2023 Your E-commerce Website</p>
+</footer>
+
+<script>
+    // Sample product data
+    const products = [
+        { id: 1, name: 'Product 1', category: 'electronics', price: 99.99 },
+        { id: 2, name: 'Product 2', category: 'clothing', price: 49.99 },
+        // Add more products as needed
+    ];
+
+    // Function to display all products
+    function showAllProducts() {
+        displayProducts(products);
+    }
+
+    // Function to display products by category
+    function showCategory(category) {
+        const filteredProducts = products.filter(product => product.category === category);
+        displayProducts(filteredProducts);
+    }
+
+    // Function to display products based on search input
+    function searchProducts() {
+        const searchInput = document.getElementById('searchInput').value.toLowerCase();
+        const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchInput));
+        displayProducts(filteredProducts);
+    }
+
+    // Function to display products in the section
+    function displayProducts(productsToDisplay) {
+        const productsSection = document.getElementById('productsSection');
+        productsSection.innerHTML = '';
+
+        productsToDisplay.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+            productElement.innerHTML = `
+                <h3>${product.name}</h3>
+                <p>Category: ${product.category}</p>
+                <p>Price: $${product.price.toFixed(2)}</p>
+                <button onclick="addToCart(${product.id})">Add to Cart</button>
+            `;
+            productsSection.appendChild(productElement);
+        });
+    }
+
+    // Function to add a product to the cart (sample implementation)
+    function addToCart(productId) {
+        // You can implement cart functionality here
+        alert(`Product with ID ${productId} added to the cart`);
+    }
+
+    // Initial display of all products
+    showAllProducts();
+</script>
+
+</body>
+</html>
